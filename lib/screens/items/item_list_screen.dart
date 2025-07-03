@@ -2,11 +2,11 @@
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:crud_app/models/item.dart'; // Sesuaikan dengan nama proyek Anda jika berbeda
-import 'package:crud_app/providers/item_provider.dart'; // Sesuaikan dengan nama proyek Anda
-import 'package:crud_app/screens/items/add_edit_item_screen.dart'; // Sesuaikan dengan nama proyek Anda
-import 'package:crud_app/screens/items/item_detail_screen.dart'; // Sesuaikan dengan nama proyek Anda
-import 'package:crud_app/core/app_constants.dart'; // Sesuaikan dengan nama proyek Anda
+import 'package:crud_app/models/item.dart';
+import 'package:crud_app/providers/item_provider.dart';
+import 'package:crud_app/screens/items/add_edit_item_screen.dart';
+import 'package:crud_app/screens/items/item_detail_screen.dart';
+import 'package:crud_app/core/app_constants.dart';
 
 class ItemListPage extends StatefulWidget {
   const ItemListPage({super.key});
@@ -41,13 +41,13 @@ class _ItemListPageState extends State<ItemListPage> {
             ElevatedButton(
               style: ElevatedButton.styleFrom(backgroundColor: AppConstants.errorColor, foregroundColor: Colors.white),
               onPressed: () async {
-                Navigator.of(context).pop(); // Tutup dialog
+                Navigator.of(context).pop();
                 try {
                   await itemProvider.deleteItem(itemId);
                   if (!mounted) return;
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(
-                      content: Text('Item berhasil dihapus', style: TextStyle(color: Colors.white)),
+                      content: Text('Item berhasil dihapus'), // Gaya SnackBar dari Theme
                       backgroundColor: AppConstants.successColor,
                     ),
                   );
@@ -56,7 +56,7 @@ class _ItemListPageState extends State<ItemListPage> {
                   if (!mounted) return;
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
-                      content: Text('Gagal menghapus item: ${e.toString().replaceFirst('Exception: ', '')}', style: TextStyle(color: Colors.white)),
+                      content: Text('Gagal menghapus item: ${e.toString().replaceFirst('Exception: ', '')}'), // Gaya SnackBar dari Theme
                       backgroundColor: AppConstants.errorColor,
                     ),
                   );
@@ -79,7 +79,6 @@ class _ItemListPageState extends State<ItemListPage> {
             return const Center(child: CircularProgressIndicator(color: AppConstants.primaryColor));
           }
           if (itemProvider.items.isEmpty) {
-            // Konten ini tidak memiliki teks "Daftar Item"
             return Center(
               child: Padding(
                 padding: const EdgeInsets.all(AppConstants.paddingLarge),
@@ -152,7 +151,7 @@ class _ItemListPageState extends State<ItemListPage> {
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
                                   IconButton(
-                                    icon: const Icon(Icons.edit, color: AppConstants.accentColor),
+                                    icon: const Icon(Icons.edit_note_rounded, color: AppConstants.accentColor), // Ikon edit yang lebih modern
                                     tooltip: 'Edit Item',
                                     onPressed: () {
                                       Navigator.of(context).push(
@@ -165,7 +164,7 @@ class _ItemListPageState extends State<ItemListPage> {
                                     },
                                   ),
                                   IconButton(
-                                    icon: const Icon(Icons.delete_forever, color: AppConstants.errorColor),
+                                    icon: const Icon(Icons.delete_sweep_rounded, color: AppConstants.errorColor), // Ikon delete yang lebih modern
                                     tooltip: 'Hapus Item',
                                     onPressed: () => _showDeleteConfirmationDialog(context, itemProvider, item.id!),
                                   ),

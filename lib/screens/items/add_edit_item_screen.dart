@@ -105,27 +105,38 @@ class _AddEditItemScreenState extends State<AddEditItemScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(_isEditing ? AppConstants.editItemTitle : AppConstants.addItemTitle),
-        elevation: 0, // Menghilangkan bayangan AppBar
+        // ===== MENAMBAHKAN GRADIENT KE APP BAR =====
+        flexibleSpace: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              colors: [AppConstants.primaryColor, AppConstants.accentColor],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+          ),
+        ),
+        // ===========================================
+        elevation: 0,
       ),
-      body: SingleChildScrollView( // Tambahkan SingleChildScrollView
-        padding: const EdgeInsets.all(AppConstants.paddingLarge), // Padding lebih besar
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(AppConstants.paddingLarge),
         child: Form(
           key: _formKey,
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start, // Align ke kiri
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
                 _isEditing ? 'Ubah Detail Item' : 'Isi Detail Item Baru',
                 style: Theme.of(context).textTheme.headlineSmall,
               ),
-              const SizedBox(height: AppConstants.spacingLarge), // Spasi lebih besar
+              const SizedBox(height: AppConstants.spacingLarge),
 
               TextFormField(
                 controller: _nameController,
                 decoration: const InputDecoration(
                   labelText: 'Nama Item',
                   hintText: 'Misal: Laptop Gaming',
-                  prefixIcon: Icon(Icons.drive_file_rename_outline_rounded), // Ikon lebih spesifik
+                  prefixIcon: Icon(Icons.drive_file_rename_outline_rounded),
                 ),
                 validator: (value) {
                   if (value == null || value.trim().isEmpty) {
@@ -140,8 +151,8 @@ class _AddEditItemScreenState extends State<AddEditItemScreen> {
                 decoration: const InputDecoration(
                   labelText: 'Deskripsi Item',
                   hintText: 'Misal: Laptop Asus ROG terbaru dengan RTX 4070',
-                  prefixIcon: Icon(Icons.description_rounded), // Ikon lebih spesifik
-                  alignLabelWithHint: true, // Label sejajar dengan hint
+                  prefixIcon: Icon(Icons.description_rounded),
+                  alignLabelWithHint: true,
                 ),
                 maxLines: 5,
                 keyboardType: TextInputType.multiline,
@@ -159,7 +170,7 @@ class _AddEditItemScreenState extends State<AddEditItemScreen> {
                   builder: (context, itemProvider, child) {
                     return ElevatedButton.icon(
                       onPressed: itemProvider.isLoading ? null : _saveItem,
-                      icon: Icon(_isEditing ? Icons.save_rounded : Icons.add_box_rounded), // Ikon yang lebih bagus
+                      icon: Icon(_isEditing ? Icons.save_rounded : Icons.add_box_rounded),
                       label: itemProvider.isLoading
                           ? const CircularProgressIndicator(color: AppConstants.whiteColor)
                           : Text(_isEditing ? 'Simpan Perubahan' : 'Tambah Item', style: Theme.of(context).textTheme.labelLarge),

@@ -2,11 +2,11 @@
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:crud_app/providers/auth_provider.dart'; // Sesuaikan package name
-import 'package:crud_app/screens/items/item_list_screen.dart'; // Sesuaikan package name
-import 'package:crud_app/screens/profile_screen.dart'; // Sesuaikan package name
-import 'package:crud_app/screens/home/home_widgets.dart'; // Sesuaikan package name
-import 'package:crud_app/core/app_constants.dart'; // Sesuaikan package name
+import 'package:crud_app/providers/auth_provider.dart';
+import 'package:crud_app/screens/items/item_list_screen.dart';
+import 'package:crud_app/screens/profile_screen.dart';
+import 'package:crud_app/screens/home/home_widgets.dart';
+import 'package:crud_app/core/app_constants.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -32,27 +32,19 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(_getAppBarTitle(currentSelectedIndex)),
+        // ===== PERUBAHAN DI SINI: MENAMBAHKAN GRADIENT KE APP BAR =====
+        flexibleSpace: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              colors: [AppConstants.primaryColor, AppConstants.accentColor],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+          ),
+        ),
+        // =============================================================
         elevation: 0,
-        // ============= PERUBAHAN DI SINI =============
-        // Menghapus tombol logout dari actions AppBar
-        actions: const [
-          // IconButton(
-          //   icon: const Icon(Icons.logout_rounded, color: AppConstants.whiteColor),
-          //   tooltip: 'Logout',
-          //   onPressed: () async {
-          //     await authProvider.signOut();
-          //     if (!mounted) return;
-          //     Navigator.of(context).pushReplacementNamed('/login');
-          //     ScaffoldMessenger.of(context).showSnackBar(
-          //       const SnackBar(
-          //         content: Text('Berhasil Logout', style: TextStyle(color: AppConstants.whiteColor)),
-          //         backgroundColor: AppConstants.successColor,
-          //       ),
-          //     );
-          //   },
-          // ),
-        ],
-        // ===============================================
+        actions: const [], // Sudah dihapus sebelumnya
       ),
       body: Center(
         child: _widgetOptions.elementAt(currentSelectedIndex),

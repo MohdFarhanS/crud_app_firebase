@@ -55,7 +55,7 @@ class _LoginScreenState extends State<LoginScreen> {
       appBar: AppBar(title: const Text(AppConstants.loginTitle)),
       body: Center(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.all(AppConstants.paddingLarge), // Padding lebih besar
+          padding: const EdgeInsets.all(AppConstants.paddingLarge),
           child: Form(
             key: _formKey,
             child: Column(
@@ -63,25 +63,25 @@ class _LoginScreenState extends State<LoginScreen> {
               children: [
                 // Ikon atau Logo Aplikasi
                 Icon(
-                  Icons.inventory_rounded, // Ikon yang menarik
+                  Icons.inventory_rounded,
                   size: 100,
                   color: AppConstants.primaryColor,
                 ),
                 const SizedBox(height: AppConstants.spacingMedium),
                 Text(
-                  AppConstants.appName, // Menggunakan nama aplikasi dari konstanta
+                  AppConstants.appName,
                   style: Theme.of(context).textTheme.headlineLarge?.copyWith(
                     color: AppConstants.primaryColor,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                const SizedBox(height: AppConstants.spacingMedium),
+                const SizedBox(height: AppConstants.spacingSmall), // Spasi sedikit lebih kecil
                 Text(
-                  AppConstants.welcomeMessage, // Pesan sambutan
-                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: AppConstants.textLightColor),
+                  'Selamat Datang Kembali!', // Pesan sambutan tambahan
+                  style: Theme.of(context).textTheme.titleMedium?.copyWith(color: AppConstants.textLightColor),
                   textAlign: TextAlign.center,
                 ),
-                const SizedBox(height: AppConstants.spacingLarge * 1.5), // Spasi yang lebih besar
+                const SizedBox(height: AppConstants.spacingLarge * 1.5),
 
                 TextFormField(
                   controller: _emailController,
@@ -136,6 +136,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         },
                   child: Text('Belum punya akun? ${AppConstants.registerTitle} sekarang', style: Theme.of(context).textTheme.bodyMedium),
                 ),
+                const SizedBox(height: AppConstants.paddingMedium), // Tambah sedikit padding bawah
               ],
             ),
           ),

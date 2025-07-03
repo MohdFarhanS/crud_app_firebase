@@ -2,8 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:crud_app/providers/auth_provider.dart'; // Sesuaikan package name
-import 'package:crud_app/core/app_constants.dart'; // Sesuaikan package name
+import 'package:crud_app/providers/auth_provider.dart';
+import 'package:crud_app/core/app_constants.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -13,7 +13,7 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
-  final _nameController = TextEditingController(); // Controller baru untuk nama
+  final _nameController = TextEditingController();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
@@ -21,7 +21,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   @override
   void dispose() {
-    _nameController.dispose(); // Dispose controller nama
+    _nameController.dispose();
     _emailController.dispose();
     _passwordController.dispose();
     _confirmPasswordController.dispose();
@@ -35,7 +35,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         await authProvider.signUpWithEmailAndPassword(
           _emailController.text,
           _passwordController.text,
-          _nameController.text, // Meneruskan nama ke AuthProvider
+          _nameController.text,
         );
         if (!mounted) return;
         ScaffoldMessenger.of(context).showSnackBar(
@@ -85,10 +85,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                   textAlign: TextAlign.center,
                 ),
-                const SizedBox(height: AppConstants.spacingLarge), // Spasi lebih besar
+                const SizedBox(height: AppConstants.spacingSmall), // Spasi sedikit lebih kecil
+                Text(
+                  'Daftar sekarang dan kelola item Anda!', // Pesan tambahan yang menarik
+                  style: Theme.of(context).textTheme.titleMedium?.copyWith(color: AppConstants.textLightColor),
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: AppConstants.spacingLarge),
 
                 TextFormField(
-                  controller: _nameController, // Menambahkan field Nama
+                  controller: _nameController,
                   decoration: const InputDecoration(
                     labelText: 'Nama Lengkap',
                     hintText: 'Masukkan nama lengkap Anda',
@@ -101,7 +107,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     return null;
                   },
                 ),
-                const SizedBox(height: AppConstants.spacingMedium), // Spasi setelah nama
+                const SizedBox(height: AppConstants.spacingMedium),
 
                 TextFormField(
                   controller: _emailController,
@@ -178,6 +184,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         },
                   child: Text('Sudah punya akun? ${AppConstants.loginTitle} di sini', style: Theme.of(context).textTheme.bodyMedium),
                 ),
+                const SizedBox(height: AppConstants.paddingMedium), // Tambah sedikit padding bawah
               ],
             ),
           ),

@@ -2,8 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:crud_app/providers/auth_provider.dart'; // Sesuaikan package name
-import 'package:crud_app/core/app_constants.dart'; // Sesuaikan package name
+import 'package:crud_app/providers/auth_provider.dart';
+import 'package:crud_app/core/app_constants.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -61,7 +61,6 @@ class ProfileScreen extends StatelessWidget {
                           style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: AppConstants.textLightColor),
                           textAlign: TextAlign.center,
                         ),
-                        // Tidak ada Text('Profil Pengguna') tambahan di sini
                       ],
                     ),
                   ),

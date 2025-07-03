@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:crud_app/models/item.dart';
 import 'package:crud_app/core/app_constants.dart';
-import 'package:intl/intl.dart'; // Import for date formatting
+import 'package:intl/intl.dart';
 
 class ItemDetailScreen extends StatelessWidget {
   final Item item;
@@ -14,19 +14,30 @@ class ItemDetailScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text(AppConstants.itemDetailTitle),
+        // ===== MENAMBAHKAN GRADIENT KE APP BAR =====
+        flexibleSpace: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              colors: [AppConstants.primaryColor, AppConstants.accentColor],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+          ),
+        ),
+        // ===========================================
         elevation: 0,
       ),
-      body: SingleChildScrollView( // Tambahkan SingleChildScrollView
-        padding: const EdgeInsets.all(AppConstants.paddingLarge), // Padding lebih besar
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(AppConstants.paddingLarge),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Card(
-              elevation: 6, // Bayangan lebih menonjol
+              elevation: 6,
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppConstants.paddingMedium)),
               margin: EdgeInsets.zero,
               child: Padding(
-                padding: const EdgeInsets.all(AppConstants.paddingLarge), // Padding konten Card lebih besar
+                padding: const EdgeInsets.all(AppConstants.paddingLarge),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -37,9 +48,9 @@ class ItemDetailScreen extends StatelessWidget {
                     const SizedBox(height: AppConstants.spacingSmall / 2),
                     Text(
                       item.name,
-                      style: Theme.of(context).textTheme.headlineSmall?.copyWith(color: AppConstants.primaryDarkColor), // Nama item lebih besar
+                      style: Theme.of(context).textTheme.headlineSmall?.copyWith(color: AppConstants.primaryDarkColor),
                     ),
-                    const SizedBox(height: AppConstants.spacingLarge), // Spasi lebih besar
+                    const SizedBox(height: AppConstants.spacingLarge),
 
                     Text(
                       'Deskripsi:',
@@ -48,7 +59,7 @@ class ItemDetailScreen extends StatelessWidget {
                     const SizedBox(height: AppConstants.spacingSmall / 2),
                     Text(
                       item.description,
-                      style: Theme.of(context).textTheme.bodyLarge, // Teks deskripsi standar
+                      style: Theme.of(context).textTheme.bodyLarge,
                     ),
                     const SizedBox(height: AppConstants.spacingLarge),
 
@@ -62,7 +73,6 @@ class ItemDetailScreen extends StatelessWidget {
                           ),
                           const SizedBox(height: AppConstants.spacingSmall / 2),
                           Text(
-                            // Format tanggal menggunakan intl
                             DateFormat('EEEE, dd MMMM yyyy HH:mm', 'id_ID').format(item.timestamp!.toDate().toLocal()),
                             style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontStyle: FontStyle.italic),
                           ),
